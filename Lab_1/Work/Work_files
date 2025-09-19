@@ -1,5 +1,5 @@
-mkdir Лабораторнаяработа№1!
-mkdir ФИО
+mkdir "Лабораторнаяработа№1!"
+mkdir "ФИО"
 touch "Text @1" "Text $2" "Text #3"
 chmod u=rwx,g=rwx,o=w "Лабораторная работа №1!"
 chmod u=w "ФИО"
