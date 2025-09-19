@@ -1,13 +1,8 @@
 mkdir Лабораторнаяработа№1!
 mkdir ФИО
-chmod 774 "Лабораторная работа №1!"
-chmod 200 "ФИО"
 touch "Text @1" "Text $2" "Text #3"
 chmod u=rwx,g=rwx,o=w "Лабораторная работа №1!"
 chmod u=w "ФИО"
-touch "Text @1"
-touch "Text $2"
-touch "Text #3"
 echo "Птица говорун отличается умом и сообразительностью!" > "Text @1"
 echo " Отличается умом, отличается сообразительностью..." >> "Text @1"
 cat "Text @1" > "Text $2"
