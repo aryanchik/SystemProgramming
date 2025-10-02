@@ -4,14 +4,14 @@ public print
 public exit
 
 section '.bss' writable
-    my db 0xA, "SkhljlJKyZVpMZaXBqERXGiwIlYCEKzY"
+    arr db 0xA, "SkhljlJKyZVpMZaXBqERXGiwIlYCEKzY"
     symbol db ?
 
 section '.text' executable
   _start:
     mov rcx, 32
     .iter:
-        mov al, [my + rcx]
+        mov al, [arr + rcx]
         mov [symbol], al
         call print
         dec rcx

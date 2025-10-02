@@ -71,5 +71,5 @@ print:
         mov edi, 1
         mov rsi, place
         mov edx, 1
-        syscall
+        int 0x80
         ret
