@@ -9,7 +9,7 @@ section '.bss' writable
 
 section '.text' executable
   _start:
-    mov rcx, 32
+    mov rcx, 34
     .iter:
         mov al, [arr + rcx]
         mov [symbol], al
