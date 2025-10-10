@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+bool isDigitsNonDecreasing(int n) {
+    if (n < 0) {
+        n = -n;
+    }
+
+
+    if (n < 10) {
+        return true;
+    }
+
+    int prev_digit = n % 10;
+    n /= 10;
+
+    while (n > 0) {
+        int current_digit = n % 10;
+        if (current_digit > prev_digit) {
+            return false;
+        }
+
+        prev_digit = current_digit;
+        n /= 10;
+    }
+
+    return true;
+}
+
+int main() {
+    int number;
+
+    printf("Введите число: ");
+    scanf("%d", &number);
+
+    if (isDigitsNonDecreasing(number)) {
+        printf("Цифры числа идут в неубывающем порядке\n", number);
+    } else {
+        printf("Цифры числа не идут в неубывающем порядке\n", number);
+    }
+
+    return 0;
+}
