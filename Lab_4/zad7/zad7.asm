@@ -18,15 +18,15 @@ _start:
    mov rdx, 255
    syscall
 
-    dec rax
-    mov rcx, rax
+   dec rax
+   mov rcx, rax
 .iter1:
-    mov al, [msg+rcx]
+   mov al, [msg+rcx]
    mov [symbol], al
    call printSymbol
-    dec rcx
-    cmp rcx, -1
-    jne .iter1
+   dec rcx
+   cmp rcx, -1
+   jne .iter1
 
 
     call exit
@@ -38,8 +38,8 @@ exit:
    syscall
 
 printSymbol:
-push rcx
-    mov rax, 1
+   push rcx
+   mov rax, 1
    mov rdi, 1
    mov rsi, symbol
    mov rdx, 1

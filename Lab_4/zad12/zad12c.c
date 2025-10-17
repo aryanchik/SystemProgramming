@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-bool isDigitsNonDecreasing(int n) {
+bool IsDigitsNonDecreasing(int n) {
     if (n < 0) {
         n = -n;
     }
@@ -11,16 +11,16 @@ bool isDigitsNonDecreasing(int n) {
         return true;
     }
 
-    int prev_digit = n % 10;
+    int prevDigit = n % 10;
     n /= 10;
 
     while (n > 0) {
-        int current_digit = n % 10;
-        if (current_digit > prev_digit) {
+        int currentDigit = n % 10;
+        if (currentDigit > prevDigit) {
             return false;
         }
 
-        prev_digit = current_digit;
+        prevDigit = currentDigit;
         n /= 10;
     }
 
@@ -33,7 +33,7 @@ int main() {
     printf("Введите число: ");
     scanf("%d", &number);
 
-    if (isDigitsNonDecreasing(number)) {
+    if (IsDigitsNonDecreasing(number)) {
         printf("Цифры числа идут в неубывающем порядке\n", number);
     } else {
         printf("Цифры числа не идут в неубывающем порядке\n", number);
