@@ -25,11 +25,11 @@ _start:
         call printMenu
         call enterPassword
         inc rbx
-        cmp rbx, 5
-        je .iter_exit
         cmp rax, 10
         jne .iter_continue
         jmp .iter2
+        cmp rbx, 5
+        je .iter_exit
 
         .iter2:
             mov al, [msg + rcx]

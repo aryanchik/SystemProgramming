@@ -55,6 +55,6 @@ print:
         ret
 
 exit:
-    mov rax, 60         ; sys_exit
-    xor rdi, rdi        ; exit code 0
+    mov rax, 60
+    xor rdi, rdi
     syscall

@@ -9,26 +9,24 @@ section '.bss' writable
 section '.text' executable
 _start:
 
-    mov rsi, [rsp + 8]
+    mov rsi, [rsp + 16]
     call str_number
     mov r8, rax
 
-    mov rsi, [rsp + 16]
+    mov rsi, [rsp + 24]
     call str_number
     mov r9, rax
 
-    mov rsi, [rsp + 24]
+    mov rsi, [rsp + 32]
     call str_number
     mov r10, rax
 
 
-    mov rax, r8
-    add rax, r9
+    mov rax, r9
+    add rax, r8
 
-    xor rdx, rdx
-    div r8
-    imul rax, r8
-    imul rax, r10
+    add rax, r8
+    add rax, r10
 
     mov [ans], rax
 
@@ -83,6 +81,7 @@ str_number:
     xor rax, rax
     xor rcx, rcx
 .loop:
+    xor rbx, rbx
     mov bl, byte [rsi + rcx]
     test bl, bl
     jz .finished
