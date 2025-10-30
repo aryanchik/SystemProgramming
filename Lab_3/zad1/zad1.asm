@@ -9,7 +9,6 @@ section '.bss' writable
 section '.text' executable
 _start:
     add rsp, 16
-    xor rsi, rsi
     pop rsi
     mov byte al, [rsi]
 

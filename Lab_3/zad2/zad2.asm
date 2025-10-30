@@ -10,7 +10,7 @@ section '.text' executable
 _start:
 
     mov rsi, [rsp + 16]
-    call str_number
+    call str_number                  ;(((((b+a)+a)+c)-c)+c)
     mov r8, rax
 
     mov rsi, [rsp + 24]
