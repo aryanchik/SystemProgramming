@@ -12,12 +12,12 @@ section '.bss' writable
   rev_buf rb 100
 
 section '.data' writable
-  endfile db '10e', 0
+  endfile db 'text2.txt', 0
 
 section '.text' executable
 
 _start:
-  ;; Открываем первый файл для чтения
+
   mov rdi, [rsp+16]
   mov rax, 2
   mov rsi, 0o
@@ -27,7 +27,7 @@ _start:
 
   mov r8, rax
 
-  ;; Открываем второй файл для записи
+
   mov rdi, [rsp + 24]
   mov rax, 2
   mov rsi, 577
@@ -82,7 +82,7 @@ next_char:
   push rdx
 ;rdx len, rsi start
  call revert_rsi
-     ;call print_str
+
  pop rdx
  inc rdx
   call write_sentence
@@ -97,15 +97,15 @@ revert_rsi:
     push rcx
     push rdx
 
-    ;rdx = len
+
     xor rcx,rcx
-    ;call new_line
+
 
     .iter:
       mov rbx, rdx
       sub rbx, rcx
 
-      mov al, [rsi+rcx] ; start s
+      mov al, [rsi+rcx]
       mov byte [buf2+rbx], al
       inc rcx
       cmp rcx, rdx
@@ -123,7 +123,7 @@ revert_rsi:
     ret
 
 end_of_text:
-  ;; Закрываем оба файла
+
 
   mov rdi, r8
   mov rax, 3
@@ -131,7 +131,7 @@ end_of_text:
   mov rdi, r10
   syscall
 
-  ;; Завершение программы
+
 l1:
   call exit
 
@@ -141,7 +141,7 @@ write_sentence:
   push rax
   push rcx
   push rdx
- ;call print_str
+
 
   mov rax, 1
   mov rdi, r10
