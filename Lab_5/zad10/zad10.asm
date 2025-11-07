@@ -8,11 +8,7 @@ section '.bss' writable
   sent_buf rb 100
   buf64 rb 64
   buf2 rb 64
-  stro dq 0
-  rev_buf rb 100
 
-section '.data' writable
-  endfile db 'text2.txt', 0
 
 section '.text' executable
 
