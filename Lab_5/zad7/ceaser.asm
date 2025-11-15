@@ -18,6 +18,7 @@ _start:
     syscall
     cmp rax, 0
     jl .l1
+
     mov r8, rax
 
 

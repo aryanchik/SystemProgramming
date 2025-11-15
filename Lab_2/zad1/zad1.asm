@@ -23,6 +23,9 @@ section '.text' executable
 
 print:
     push rcx
+
+
+
     mov eax, 4
     mov ebx, 1
     mov ecx, symbol
