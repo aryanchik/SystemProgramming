@@ -20,6 +20,9 @@ _start:
     mov rdx, 1
     syscall
 
+
+
+
     call exit
 
 print:

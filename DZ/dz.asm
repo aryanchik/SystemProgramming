@@ -26,6 +26,7 @@ section '.bss' writable
 
 section '.text' executable
 
+
 create_array:
     mov rsi, rdi
 
