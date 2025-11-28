@@ -6,7 +6,6 @@ include 'func.asm'
 section '.bss' writable
   buffer rb 100
   sent_buf rb 100
-  buf64 rb 64
   buf2 rb 64
 
 

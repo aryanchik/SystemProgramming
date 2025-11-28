@@ -2,7 +2,7 @@ format elf64
 public _start
 include 'func.asm'
 
-section '.data' writable
+section '.bss' writable
     buffer rb 100
 
 section '.text' executable
