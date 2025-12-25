@@ -24,7 +24,10 @@ extrn keypad
 extrn mydelay
 
 section '.data' writable
+<<<<<<< HEAD
     ;; Начальные значения
+=======
+>>>>>>> fix-push
     palette_color dq 0x100
     is_fast dq 0
     current_delay dq 100000
@@ -120,7 +123,11 @@ main_loop:
     jmp .read_keys
 
 .set_fast:
+<<<<<<< HEAD
     mov qword [current_delay], 30000
+=======
+    mov qword [current_delay], 3000
+>>>>>>> fix-push
     jmp .read_keys
 
 .keys_done:

@@ -1,1 +1,2 @@
-Privet mir! Hello world? Hola mundo.
+Privet mir! Hello world?
+Hola mundo.
