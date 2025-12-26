@@ -140,7 +140,7 @@ game_loop:
     je server_shutdown
     cmp al, 'Q'
     je server_shutdown
-    jmp game_loop
+    jmp server_shutdown
 
 hit_me:
     mov rdi, 0

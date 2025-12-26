@@ -5,26 +5,24 @@ public _start
 extrn printf
 
 section '.data' writable
-    ; Заголовки и формат
-    header_msg     db "Исследование сходимости бесконечного произведения для cos(x)", 10
-                   db "Формула: cos(x) = П (1 - 4x^2 / ((2n-1)^2 * pi^2))", 10, 0
+    header_msg     db "Исследование сходимости бесконечного произведения для cos(x)", 10, 0
 
-    table_header   db "-------------------------------------------------------------", 10
-                   db " %-10s | %-15s | %-20s", 10
-                   db "-------------------------------------------------------------", 10, 0
+    table_header   db "--------------------------------------------------------------------------------", 10
+                   db " %-10s | %-15s | %-15s | %-20s", 10
+                   db "--------------------------------------------------------------------------------", 10, 0
+
     col_x          db "x", 0
     col_eps        db "Epsilon", 0
+    col_res        db "Cos(x)", 0
     col_n          db "Множителей (N)", 0
 
-    table_row      db " %-10.4f | %-15.8f | %-20d", 10, 0
-    separator      db "-------------------------------------------------------------", 10, 0
+    table_row      db " %-10.4f | %-15.8f | %-15.8f | %-20d", 10, 0
+    separator      db "--------------------------------------------------------------------------------", 10, 0
 
     newline        db 10, 0
 
-
     x_values       dq 0.0, 0.785398, 1.0, 1.570796, 3.141592
     x_count        dq 5
-
 
     epsilons       dq 0.01, 0.0001, 0.000001, 0.00000001
     eps_count      dq 4
@@ -32,7 +30,7 @@ section '.data' writable
     const_1        dq 1.0
     const_2        dq 2.0
     const_4        dq 4.0
-    limit_iters    dq 1000000 ; Защита от зависания
+    limit_iters    dq 1000000
 
 section '.bss' writable
     current_x rq 1
@@ -43,7 +41,6 @@ section '.bss' writable
 
     iter_count rq 1
 
-
     temp_k rq 1
     temp_denom rq 1
     temp_term rq 1
@@ -52,21 +49,19 @@ section '.bss' writable
 
 section '.text' executable
 
-
 compute_convergence:
     push rbp
     mov rbp, rsp
 
     finit
     fld qword [current_x]
-    fcos                     ; st0 = cos(x)
+    fcos
     fstp qword [true_val]
 
     fld1
     fstp qword [prod_val]
 
     mov qword [iter_count], 0
-
 
     fld qword [current_x]
     fmul st0, st0
@@ -80,20 +75,16 @@ compute_convergence:
 .product_loop:
     inc qword [iter_count]
 
-
     mov rax, [iter_count]
     shl rax, 1
     dec rax
     mov [temp_k], rax
-
 
     fild qword [temp_k]
     fmul st0, st0
 
     fld qword [c_val]
     fdivrp st1, st0
-
-
 
     fld1
     fsubrp st1, st0
@@ -132,7 +123,8 @@ _start:
     mov rdi, table_header
     mov rsi, col_x
     mov rdx, col_eps
-    mov rcx, col_n
+    mov rcx, col_res
+    mov r8, col_n
     xor rax, rax
     call printf
 
@@ -157,8 +149,11 @@ _start:
     mov rdi, table_row
     movq xmm0, [current_x]
     movq xmm1, [current_eps]
+    movq xmm2, [prod_val]
+
     mov rsi, [iter_count]
-    mov rax, 2
+
+    mov rax, 3
     call printf
 
     inc r13
@@ -173,7 +168,6 @@ _start:
     jmp .loop_x
 
 .done_all:
-    ; Выход
     mov rax, 60
     xor rdi, rdi
     syscall
