@@ -141,31 +141,24 @@ input_keyboard:
     push rcx
     push rsi
 
-    ; 1. Указываем ПРАВИЛЬНЫЙ буфер для записи
-    mov rsi, input_buf    ; Убедись, что input_buf объявлен в section .bss
-    mov rax, 0            ; sys_read
-    mov rdi, 0            ; stdin
-    mov rdx, 255          ; макс длина
+    mov rsi, input_buf
+    mov rax, 0
+    mov rdi, 0
+    mov rdx, 255
     syscall
 
-    ; 2. rax теперь содержит количество прочитанных байт (включая \n)
-    ; Если ввели 0 байт (EOF), выходим
     test rax, rax
     jz .end_input
 
-    ; 3. Убираем символ переноса строки (0x0A)
-    mov rcx, rax          ; копируем длину в rcx
-    dec rcx               ; встаем на индекс последнего символа
-    mov al, [rsi + rcx]   ; берем этот символ
-    cmp al, 0x0A          ; это перенос строки?
-    jne .save_len         ; если нет (вдруг буфер забит до краев), идем сохранять
+    mov rcx, rax
+    dec rcx
+    mov al, [rsi + rcx]
+    cmp al, 0x0A
+    jne .save_len
 
-    mov byte [rsi + rcx], 0 ; заменяем \n на нуль-терминатор
-    ; (Длина в rcx как раз стала правильной без \n)
+    mov byte [rsi + rcx], 0
 
 .save_len:
-    ; 4. КРИТИЧЕСКИЙ МОМЕНТ: сохраняем длину в переменную
-    ; Если ты использовал dec rcx, то в rcx сейчас чистая длина текста
     mov [msg_len], rcx
 
 .end_input:
